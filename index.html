@@ -25,42 +25,298 @@
 		<div class="reveal">
 			<div class="slides">
 
-				<section><h1>Rosół</h1></section>
+		<!-- SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS -->
 
 				<section>
-					<h2>Składniki</h2>
+					<h1>XPath</h1>
+					<h2>introduction</h2>
+				</section>
+				<section>
+					<p><b>XPath</b> - XML Path Language</p>
 					<ul>
-						<li>Woda</li>
-						<li>Rosół Knorr</li>
+						<li>Declarative language used (together with XSLT, XPointer an other technologies) to query XML and select XML nodes</li>
+						<li>Syntax for defining fragments of XML documents</li>
+						<li>Path expressions to navigate</li>
+						<li>It includes a library of standard functions</li>
+					</ul>
+				</section>
+
+<!-- SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS -->
+
+				<section data-background="#dddddd" data-transition="zoom" >
+					<p><b>XPath 2.0 contains</b></p>
+					<ul>
+						<li>Around 50 of different data types, like <b>xs:string</b>, <b>xs:integer</b> or <b>xs:date</b></li>
+					 	<li>Around 100 built-in functions</li>
+
 					</ul>
 
+					<p><b>XPath 3.0 contains</b></p>
+					<ul>
+						<li>Introduced new data types (now there are over 200)</li>
+					 	<li>A function can now be passed to another function (as an
+								argument), or be returned from a function (introduction to
+								functional programming)</li>
+						<li>It is also possible for programmers to write their own functions
+								(inline functions), and create their own function libraries</li>
+
+					</ul>
 				</section>
 
-				<section>
-					<img data-src="http://www.ciam.pl/uploads/_contents/101374/icon/Smaczna%20porcja%20Ros%C3%B3%C5%82%20z%20kurczaka%20z%20makaronem%20%C5%81agodna%2061g.JPG"/>
-				</section>
+<!-- SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS -->
 
 				<section>
-					<img data-src="http://i.giphy.com/yLU64mMh6pgGs.gif"/>
+					<h2 >Syntax</h2>
+					<p>Location path full syntax consists of:</p>
+					<table>
+						<tr>
+							<th style="color:red"><b>an axis</b></th>
+							<th>specifies the direction of accessing nodes from document tree</th>
+						</tr>
+						<tr>
+							<th style="color:black"><b>a node test</b></th>
+							<th>specifies the type of queried nodes</th>
+						</tr>
+						<tr>
+							<th style="color:green"><b>zero or more predicates</b></th>
+							<th>boolean expression filtering selected nodes
+									specified in square brackets [ ]</th>
+						</tr>
+					</table>
+					<p><b>Example:</b></p>
+					<p style="font-size: 1.5em"><ph style="color:red">child::</ph><ph style="color:black">concept</ph><ph style="color:green">[@id=concept_1]</ph></p>
+
 				</section>
 
-				<section>
-					<pre>
-						<code class="xml" data-trim contenteditable>
-<ul>
-	<li>Woda</li>
-	<li>Rosół Knorr</li>
-</ul>
-						</code>
-					</pre>
-				</section>
+				<!-- SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS -->
+
 
 				<section>
-					<section>
-						<video src=""
-					</section>
-					<section><h2>Vertical slide</h2></section>
+					<p>An axis – determines which direction to navigate with respect to a particular node</p>
+					<img src="images/axis.png"/>
 				</section>
+
+				<!-- SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS -->
+
+				<section>
+					<p><b>Node test</b> is used to select nodes</p>
+					<p>Node test can be done by:
+						<ul>
+							<li>name (e.g. <code>/concept/title</code>)</li>
+							<li>kind:
+								<ul>
+									<li><code>element()</code></li>
+									<li><code>attribute()</code></li>
+									<li><code>text()</code></li>
+									<li><code>node()</code></li>
+								</ul>
+							</li>
+						</ul>
+					</p>
+				</section>
+
+<!-- SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS -->
+
+				<section>
+					<p><b>Predicates</b> are used to filter nodes in a location path step</p>
+					<p>You can provide any number of predicates</p>
+					<p>Examples:
+						<ul>
+							<li style="font-size: 0.7em"><code data-trim>/Concept/Title[.="Introduction"]</code></li>
+							<li><code style="font-size: 0.7em">/Concept[@id="c_concept" or @id="c_concept_2"]</code></li>
+							<li><code style="font-size: 0.7em">/Concept[@id="c_concept"][./Title="Introduction"]</code></li>
+						</ul>
+					</p>
+
+
+				</section>
+
+<!-- SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS -->
+				<section>
+					<table>
+						<colgroup>
+						       <col span="1" style="width: 10%;">
+						       <col span="1" style="width: 50%;">
+						       <col span="1" style="width: 40%;">
+						</colgroup>
+						<tr>
+							<th style="width: 5%"><b></b></th>
+							<th><code style="font-size: 0.7em">child::</code></th>
+							<th>child axis – default axis</th>
+						</tr>
+						<tr>
+							<th style="width: 5%"><b>//</b></th>
+							<th><code style="font-size: 0.7em">descendant-or-self::node()</code></th>
+							<th>context node + descendant nodes</th>
+						</tr>
+						<tr>
+							<th style="width: 20%"><b>.</b></th>
+							<th><code style="font-size: 0.7em">self::node()</code></th></th>
+							<th>context node</th>
+						</tr>
+						<tr>
+							<th style="width: 20%">..</th>
+							<th><code style="font-size: 0.7em">parent::node()</code></th>
+							<th>parent node</th>
+						</tr>
+						<tr>
+							<th style="width: 20%">@</th>
+							<th><code style="font-size: 0.7em">attribute::</code></th>
+							<th>attribute axis</th>
+						</tr>
+						<tr>
+							<th>*</th>
+							<th>can be used as a wildcard (any element)</th>
+					</table>
+
+				</section>
+
+
+				<!-- SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS -->
+
+								<section>
+									<h2 style="position: center">Examples</h2>
+								</section>
+
+
+				<!-- SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS -->
+							<section>
+								<h3>Example task 1</h3>
+								<p>List all the cars in the second section</p>
+								<p class="fragment fade-in">Solution: <code style="font-size: 0.7em">//section[@id="section_2"]//li</code></p>
+						</section>
+
+			<!-- SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS -->
+									<section>
+										<h3>Example task 2</h3>
+										<p>List all elements with a product 1.2</p>
+										<p class="fragment fade-in">Solution: <code style="font-size: 0.7em">//*[@product="1.2"]</code></p>
+								</section>
+
+
+<!-- SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS -->
+
+				<section>
+					<h2 style="position: center">Useful functions: element positioning</h2>
+				</section>
+
+<!-- SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS -->
+
+<section>
+	<p style="font-size: 1.5em"><code>predicate with a number</code><p>
+	<p>returns an element in position declared in the predicate</p>
+	<p class="fragment fade-in">Example : <code>/concept/conbody/section[2]</code></p>
+</section>
+
+<!-- SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS -->
+
+				<section>
+					<p style="font-size: 1.5em"><code>last()</code><p>
+					<p>returns the last element</p>
+					<p class="fragment fade-in">Example : <code>/concept/conbody/section[last()]</code></p>
+				</section>
+
+<!-- SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS -->
+
+								<section>
+									<p style="font-size: 1.5em"><code>position()</code><p>
+									<p>returns elements according to their position</p>
+									<p class="fragment fade-in">Example : <code style="font-size: 0.9em">/concept/conbody/section[position < 3]</code></p>
+								</section>
+
+<!-- SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS -->
+			<section>
+				<h2>Example task 3</h2>
+				<p>From the list of animals, choose last but one</p>
+				<p class="fragment fade-in">Solution: <code style="font-size: 0.7em">//section[title="Animals"]//li[last()-1]</code></p>
+				<p class="fragment fade-in">or <code style="font-size: 0.7em">//section[title="Animals"]//li[4]</code></p>
+			</section>
+
+			<!-- SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS -->
+
+							<section>
+								<h2 style="position: center">Useful functions: counting</h2>
+							</section>
+
+			<!-- SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS -->
+
+															<section>
+																<p style="font-size: 1.5em"><code>count</code><p>
+																<p>counts the number of elements</p>
+																<p class="fragment fade-in">Example : <code style="font-size: 0.9em">count(/concept/conbody/section/p)</code></p>
+															</section>
+
+			<!-- SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS -->
+																		<section>
+																			<h2>Example task 4</h2>
+																			<p>Count the number of all cars</p>
+																			<p class="fragment fade-in">Solution: <code style="font-size: 0.6em">count(//section[title="Cars" or title="Cars 2"]//li)</code></p>
+																		</section>
+
+			<!-- SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS -->
+
+																						<section>
+																							<h2 style="position: center">Useful functions: strings</h2>
+																						</section>
+
+			<!-- SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS -->
+
+																						<section>
+																							<p style="font-size: 1.5em"><code>contains(string1, string2)</code><p>
+																							<p>Checks if string1 is contained in string2. Useful in predicates</p>
+																							<p class="fragment fade-in">Example : <code style="font-size: 0.7em">contains(/concept/conbody/section/p, "Cars")</code></p>
+																						</section>
+
+			<!-- SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS -->
+
+																						<section>
+																							<p style="font-size: 1.5em"><code>concat(string1, string2, string3, ...)</code><p>
+																							<p>Concatanates all strings</p>
+																							<p class="fragment fade-in">Example : <code style="font-size: 0.9em">concat('This', ' is', ' a', ' string')</code></p>
+																						</section>
+
+<!-- SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS -->
+
+<section>
+	<p style="font-size: 1.5em"><code>string-join((string1, string2, string3, ...), separator)</code><p>
+	<p>Joins all strings using a chosen separator</p>
+	<p class="fragment fade-in">Example : <code style="font-size: 0.9em">string-join(('This', 'is', 'a', 'string'), " ")</code></p>
+</section>
+
+<!-- SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS -->
+
+
+																						<section>
+																							<p style="font-size: 1.5em"><code>substring(string1, position)</code><p>
+																							<p>Cuts a string into two based on a position</p>
+																							<p class="fragment fade-in">Example : <code style="font-size: 0.9em">substring('Drum&Bass', 6) = 'Bass'</code></p>
+																						</section>
+
+
+<!-- SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS -->
+																						<section>
+																							<h2>Example task 5</h2>
+																							<p>Concatanate titles from first and second section</p>
+																							<p class="fragment fade-in">Solution: <code style="font-size: 0.6em">concat(//section[1]/title, ' and ', //section[2]/title)</code></p>
+																							<p class="fragment fade-in">or <code style="font-size: 0.6em">string-join((//section[1]/title, 'and', //section[2]/title), " ")</code></p>
+																						</section>
+
+<!-- SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS -->
+																						<section>
+																							<h2>Example task 6</h2>
+																							<p>Choose cars that contain an "o" letter</p>
+																							<p class="fragment fade-in">Solution: <code style="font-size: 0.6em">//section[title="Cars" or title="Cars 2"]//li[contains(.,'o')]</code></p>
+																						</section>
+
+
+<!-- SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS -->
+
+																						<section>
+																								<h2 style="position: center">Thanks!</h2>
+																								<p>Homework</p>
+																								<p>Useful links</p>
+																						</section>
+
 
 			</div>
 		</div>
